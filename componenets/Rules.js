@@ -75,7 +75,9 @@ const Rules=()=>{
                     }
                     #CurrentRules{
                         border-radius:10px;
-                        box-shadow:1px 1px 20px rgba(0,100,255,.5)
+                        box-shadow:1px 1px 20px rgba(0,100,255,.5);
+                        
+                        -webkit-box-shadow:1px 1px 20px rgba(0,100,255,.5)
                     }
                 `}
             </style>
