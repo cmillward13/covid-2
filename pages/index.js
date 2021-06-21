@@ -5,7 +5,6 @@ import VaccineChart from '../componenets/VaccineChart'
 import {useState, useEffect} from 'react'
 import CasesChart from '../componenets/CasesChart'
 import Header from '../componenets/Header'
-import Explanation from '../componenets/Explanation'
 
 export default function Home(props) {
 
@@ -64,7 +63,6 @@ useEffect(()=>{
         <Header></Header>
         <Banner props={changePage}></Banner>
         <LeftBar></LeftBar>
-        <Explanation></Explanation>
         <VaccineChart props={{data:props.VaxData, size:size}}></VaccineChart>
         <Footer props={{page:page}}></Footer>
       </div>

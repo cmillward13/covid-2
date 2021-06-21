@@ -46,9 +46,6 @@ const CasesChart=(props)=>{
         var dates = backDate(lastDate,datasets[0].data.length-1)
         
 
-        console.log(temp)
-
-
         //Make Data for Chart
         const data={
             labels:dates,
