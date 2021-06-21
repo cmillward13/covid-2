@@ -2,7 +2,7 @@ import Banner from '../componenets/Banner'
 import LeftBar from '../componenets/LeftBar'
 import Footer from '../componenets/Footer'
 import VaccineChart from '../componenets/VaccineChart'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import CasesChart from '../componenets/CasesChart'
 import Header from '../componenets/Header'
 
@@ -15,6 +15,46 @@ export default function Home(props) {
         return (page==='Vaccines' ? setPage('Cases'): setPage('Vaccines'))
   }
 
+  //Page Size
+  const [size, setSize]=useState({height:800,width:1000})
+  function debounce(fn, ms) {
+    let timer
+    return _ => {
+      clearTimeout(timer)
+      timer = setTimeout(_ => {
+        timer = null
+        fn.apply(this, arguments)
+      }, ms)
+    };
+  }
+
+function resize(){
+    function handleResize(){
+        setSize({height:window.innerHeight,width:window.innerWidth})
+    }
+
+    const  debouncedHandleResize=debounce(handleResize,500)
+    window.addEventListener('resize',debouncedHandleResize)
+
+    return _=>{
+        window.removeEventListener('resize', debouncedHandleResize)
+        element.clear()
+    }
+}   
+
+useEffect(()=>{
+    function handleResize(){
+        setSize({height:window.innerHeight,width:window.innerWidth})
+    }
+
+    const  debouncedHandleResize=debounce(handleResize,100)
+    window.addEventListener('resize',debouncedHandleResize)
+
+    return _=>{
+        window.removeEventListener('resize', debouncedHandleResize)
+    }
+})
+
   switch(page){
     case 'Vaccines': 
       return (
@@ -23,7 +63,7 @@ export default function Home(props) {
         <Header></Header>
         <Banner props={changePage}></Banner>
         <LeftBar></LeftBar>
-        <VaccineChart props={{data:props.VaxData}}></VaccineChart>
+        <VaccineChart props={{data:props.VaxData, size:size}}></VaccineChart>
         <Footer props={{page:page}}></Footer>
       </div>
       )
@@ -34,7 +74,7 @@ export default function Home(props) {
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet"></link>
           <Header></Header>
           <Banner props={changePage}></Banner>
-          <CasesChart props={{data:props.CasesData, colors:props.ChartColors}}></CasesChart>
+          <CasesChart props={{data:props.CasesData, colors:props.ChartColors,size:size}}></CasesChart>
           <Footer props={{page:page}}></Footer>
         </div>
       )

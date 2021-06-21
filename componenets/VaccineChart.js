@@ -4,47 +4,7 @@ import {useEffect, useState} from 'react'
 
 const VaccineChart = (props)=>{
 
-    
-    const [size,setSize]=useState({height:800,width:1000})
-    const [loaded,setLoaded]=useState(false);
-
-    function debounce(fn, ms) {
-        let timer
-        return _ => {
-          clearTimeout(timer)
-          timer = setTimeout(_ => {
-            timer = null
-            fn.apply(this, arguments)
-          }, ms)
-        };
-      }
-
-    function resize(){
-        function handleResize(){
-            setSize({height:window.innerHeight,width:window.innerWidth})
-        }
-
-        const  debouncedHandleResize=debounce(handleResize,100)
-        window.addEventListener('resize',debouncedHandleResize)
-
-        return _=>{
-            window.removeEventListener('resize', debouncedHandleResize)
-        }
-    }   
-
-    useEffect(()=>{
-        function handleResize(){
-            setSize({height:window.innerHeight,width:window.innerWidth})
-        }
-
-        const  debouncedHandleResize=debounce(handleResize,100)
-        window.addEventListener('resize',debouncedHandleResize)
-
-        return _=>{
-            window.removeEventListener('resize', debouncedHandleResize)
-        }
-    })
-
+    const size=props.props.size
 
     var getData=async()=>{
 
@@ -288,7 +248,7 @@ const VaccineChart = (props)=>{
                     labels:{
                         usePointStyle:true,
                         font:{
-                            size:size.height*0.015,
+                            size:size.width*0.008,
                             family:'Inter',
                         },
                         boxWidth:5
@@ -330,7 +290,6 @@ const VaccineChart = (props)=>{
             className='DosesChart' 
             data={data}
             options={options}
-            onLoad={resize}
             />;
 
         ReactDOM.render(element, document.getElementById('DosesChartArea'));

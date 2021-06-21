@@ -5,46 +5,7 @@ import { getStaticProps } from '../pages'
 
 const CasesChart=(props)=>{
 
-    const [size,setSize]=useState({height:800,width:1000})
-
-    function debounce(fn, ms) {
-        let timer
-        return _ => {
-          clearTimeout(timer)
-          timer = setTimeout(_ => {
-            timer = null
-            fn.apply(this, arguments)
-          }, ms)
-        };
-      }
-
-    function resize(){
-        function handleResize(){
-            setSize({height:window.innerHeight,width:window.innerWidth})
-        }
-
-        const  debouncedHandleResize=debounce(handleResize,500)
-        window.addEventListener('resize',debouncedHandleResize)
-
-        return _=>{
-            window.removeEventListener('resize', debouncedHandleResize)
-            element.clear()
-        }
-    }   
-
-    useEffect(()=>{
-        function handleResize(){
-            setSize({height:window.innerHeight,width:window.innerWidth})
-        }
-
-        const  debouncedHandleResize=debounce(handleResize,100)
-        window.addEventListener('resize',debouncedHandleResize)
-
-        return _=>{
-            window.removeEventListener('resize', debouncedHandleResize)
-        }
-    })
-
+    const size=props.props.size
 
     //FUNCTIONS
     function backDate(lastDate,totalNeeded){
@@ -71,8 +32,7 @@ const CasesChart=(props)=>{
         const PHUs=[... new Set(objs.map(item=>item.PHU_NAME))].slice(1,-1).sort()
 
         //Get each PHU's active cases at each date
-        var refDate= new Date(2021,0,9)
-        var temp=PHUs.map((a,index)=>[{label:a,data:objs.filter(item=>{return item.PHU_NAME===a && new Date(item.FILE_DATE)>refDate}).map(i=>i.ACTIVE_CASES),hidden:true,borderColor:props.props.colors[index],fill:true}])
+        var temp=PHUs.map((a,index)=>[{label:a,data:objs.filter(item=>{return item.PHU_NAME===a }).map(i=>i.ACTIVE_CASES),hidden:true,borderColor:props.props.colors[index],fill:true}])
 
         //Make Datasets
         var datasets=[];
@@ -85,9 +45,6 @@ const CasesChart=(props)=>{
         var lastDate=objs[objs.length-1].FILE_DATE
         var dates = backDate(lastDate,datasets[0].data.length-1)
         
-
-        console.log(temp)
-
 
         //Make Data for Chart
         const data={
@@ -137,9 +94,9 @@ const CasesChart=(props)=>{
             plugins:{
                 title:{
                     display:true,
-                    text:"Ontario's Active COVID-19 Cases All-Time",
+                    text:"Ontario's Active COVID-19 Cases in 2021",
                     font:{
-                        size:size.width*0.015,
+                        size:size.width*0.02,
                         family:'Inter'
                     },
                 },
@@ -192,7 +149,6 @@ const CasesChart=(props)=>{
             className='CasesChart' 
             data={data}
             options={options}
-            onLoad={resize()}
             />;
 
         ReactDOM.render(element,document.getElementById('CasesChartArea'))
