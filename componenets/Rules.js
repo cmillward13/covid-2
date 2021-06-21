@@ -5,12 +5,11 @@ const Rules=()=>{
         <div className='Rules'>
             <h1>Rules</h1>
 
-            <span id='CurrentRules'></span>
             <table>
                 <tbody>
                     <th className='Step'></th>
                     <th className='Rule'>Public Health Rules</th>
-                    <tr>
+                    <tr id='CurrentRules'>
                         <th className='Step' id='Step1Rules'>Step 1</th>
                         <td>Outdoor dining with 4-person table limit, non-essential retail at 15% capacity
                         </td>
@@ -75,14 +74,7 @@ const Rules=()=>{
                         vertical-align:top;
                     }
                     #CurrentRules{
-                        displat:inline-block;
-                        position:absolute;
-                        top:19.55vw;
-                        height:4vw;
-                        left:0.5vw;
-                        right:0.5vw;
-
-                        border-radius:15px;
+                        border-radius:10px;
                         box-shadow:1px 1px 20px rgba(0,100,255,.5)
                     }
                 `}

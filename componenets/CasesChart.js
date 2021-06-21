@@ -5,11 +5,7 @@ import { getStaticProps } from '../pages'
 
 const CasesChart=(props)=>{
 
-    console.log(props.props.colors)
-
-
     const [size,setSize]=useState({height:800,width:1000})
-    const [loaded,setLoaded]=useState(false);
 
     function debounce(fn, ms) {
         let timer
@@ -27,7 +23,7 @@ const CasesChart=(props)=>{
             setSize({height:window.innerHeight,width:window.innerWidth})
         }
 
-        const  debouncedHandleResize=debounce(handleResize,100)
+        const  debouncedHandleResize=debounce(handleResize,500)
         window.addEventListener('resize',debouncedHandleResize)
 
         return _=>{
@@ -75,7 +71,8 @@ const CasesChart=(props)=>{
         const PHUs=[... new Set(objs.map(item=>item.PHU_NAME))].slice(1,-1).sort()
 
         //Get each PHU's active cases at each date
-        var temp=PHUs.map((a,index)=>[{label:a,data:objs.filter(item=>{return item.PHU_NAME===a}).map(i=>i.ACTIVE_CASES),hidden:true,borderColor:props.props.colors[index],fill:true}])
+        var refDate= new Date(2021,0,9)
+        var temp=PHUs.map((a,index)=>[{label:a,data:objs.filter(item=>{return item.PHU_NAME===a && new Date(item.FILE_DATE)>refDate}).map(i=>i.ACTIVE_CASES),hidden:true,borderColor:props.props.colors[index],fill:true}])
 
         //Make Datasets
         var datasets=[];
@@ -87,6 +84,10 @@ const CasesChart=(props)=>{
         //get all dates
         var lastDate=objs[objs.length-1].FILE_DATE
         var dates = backDate(lastDate,datasets[0].data.length-1)
+        
+
+        console.log(temp)
+
 
         //Make Data for Chart
         const data={
