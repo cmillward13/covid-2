@@ -32,7 +32,8 @@ const CasesChart=(props)=>{
         const PHUs=[... new Set(objs.map(item=>item.PHU_NAME))].slice(1,-1).sort()
 
         //Get each PHU's active cases at each date
-        var temp=PHUs.map((a,index)=>[{label:a,data:objs.filter(item=>{return item.PHU_NAME===a }).map(i=>i.ACTIVE_CASES),hidden:true,borderColor:props.props.colors[index],fill:true}])
+        var refDate=new Date(2021,0,8);
+        var temp=PHUs.map((a,index)=>[{label:a,data:objs.filter(item=>{return item.PHU_NAME===a && new Date(item.FILE_DATE)>refDate}).map(i=>i.ACTIVE_CASES),hidden:true,borderColor:props.props.colors[index],fill:true}])
 
         //Make Datasets
         var datasets=[];
