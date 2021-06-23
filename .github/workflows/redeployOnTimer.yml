@@ -5,7 +5,7 @@ name: "Redeploy site on scheduler"
 
 on: 
   schedule:
-  - cron: "30 10 * * *" #at 10:30 UTC (6:30 EST) each morning
+  - cron: "10 22 * * *" #at 10:30 UTC (6:30 EST) each morning
 
 jobs:
   job1:
