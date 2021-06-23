@@ -11,9 +11,8 @@ const VaccineChart = (props)=>{
         //get all desired data objects
         var objs=(await props.props.data.result.records).filter(a=>{return a.Agegroup==="Adults_18plus"})
 
-
         //get all dates
-        var dates=objs.map(a=>new Date(a.Date).toDateString().slice(4))
+        var dates=objs.map(a=>new Date(a.Date.concat("T00:00:00")).toDateString().slice(4))
         
         //get % individuals partially vaccinated
         const partiallyVaxx=objs.map(a=>(a.Percent_at_least_one_dose*100))
