@@ -10,18 +10,11 @@ on:
 jobs:
   job1:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
     steps:
-     - uses: boyeborg/fetch-url-action@v1.1
-
-    name: 'Fetch URL'
-    description: 'Fetches a URL'
-    inputs:
-      url:
-        description: 'The url to fetch'
-        required: true
-    outputs:
-      result:
-        description: 'The result returned by the URL'
-    runs:
-      using: 'node12'
-      main: 'dist/index.js'
+    - name: 'Fetch URL'
+      uses: boyeborg/fetch-url-action@v1.1
+      with:
+          url:'https://api.vercel.com/v1/integrations/deploy/prj_y9Z6HJAZ5OwSGL0L2Emio3y6qbhg/MH1nIGMQPW'
