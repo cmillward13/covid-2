@@ -8,17 +8,17 @@ import Header from '../componenets/Header'
 
 export default function Home(props) {
 
-  //re-deploy website if we're missing data (make server fetch new data)
-  var vaxcheck=props.CasesData.result.records
-  var lastdate=new Date(vaxcheck[vaxcheck.length-1].Date)
-  var today = new Date()
-  today.setHours(0,0,0,0)
+  // //re-deploy website if we're missing data (make server fetch new data)
+  // var vaxcheck=props.CasesData.result.records
+  // var lastdate=new Date(vaxcheck[vaxcheck.length-1].Date)
+  // var today = new Date()
+  // today.setHours(0,0,0,0)
 
-  if(lastdate<today && new Date().getHours()>=6){ //if we're missing data AND it's past 6am
-    console.log('Thank you for updating the data today!')
-    //re-deploy site!
-    // fetch('https://api.vercel.com/v1/integrations/deploy/prj_y9Z6HJAZ5OwSGL0L2Emio3y6qbhg/MH1nIGMQPW')
-  }
+  // if(lastdate<today && new Date().getHours()>=6){ //if we're missing data AND it's past 6am
+  //   console.log('Thank you for updating the data today!')
+  //   //re-deploy site!
+  //   fetch('https://api.vercel.com/v1/integrations/deploy/prj_y9Z6HJAZ5OwSGL0L2Emio3y6qbhg/MH1nIGMQPW')
+  // }
 
   //Page Change
   const [page,setPage]=useState('Vaccines');

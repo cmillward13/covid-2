@@ -1,7 +1,5 @@
 import{Line} from 'react-chartjs-2'
 import ReactDOM from 'react-dom'
-import{useState, useEffect} from 'react'
-import { getStaticProps } from '../pages'
 
 const CasesChart=(props)=>{
 

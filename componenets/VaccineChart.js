@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom'
 import {Line} from 'react-chartjs-2'
-import {useEffect, useState} from 'react'
 
 const VaccineChart = (props)=>{
 
