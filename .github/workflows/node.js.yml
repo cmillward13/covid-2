@@ -1,0 +1,22 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  schedule:
+  - cron: "49 22 * * *" #at 10:30 UTC (6:30 EST) each morning
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cmillward13/fetch-url@1.0
+      with:
+        url: https://api.vercel.com/v1/integrations/deploy/prj_y9Z6HJAZ5OwSGL0L2Emio3y6qbhg/MH1nIGMQPW
+      id: fetcher
+      
+    - name: afterDeploy
+      if: steps.fetcher.outputs.completeed == 'true'
+      run: echo "Site Re-deployed"
