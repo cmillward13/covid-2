@@ -5,7 +5,7 @@ name: redeploy
 
 on:
   schedule:
-  - cron: "35 2 * * *" #at 10:30 UTC (6:30 EST) each morning
+  - cron: "38 * * * *" #at 10:30 UTC (6:30 EST) each morning
 
 jobs:
   job1:
