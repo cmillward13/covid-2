@@ -50,7 +50,7 @@ const VaccineChart = (props)=>{
         const partSlope=avg(diff(partiallyVaxx.slice(-5))) //avg growth rate of partially vaxx
 
         //Best Case (21 Day marks)
-        var G2day=addDays(StartDate,21)
+        var G2day= new Date(2021,5,30)
         var G3day=addDays(G2day,21)
         
 
