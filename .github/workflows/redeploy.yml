@@ -1,0 +1,15 @@
+name: redeploy
+
+on:
+  schedule: 
+    - cron: '30 10/11 * * *' #at 10:30 and 11:30 UTC (6:30 and 7:30 EST) each morning'
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: boyeborg/fetch-url-action@v1.1
+      with:
+        url: 'https://api.vercel.com/v1/integrations/deploy/prj_y9Z6HJAZ5OwSGL0L2Emio3y6qbhg/MH1nIGMQPW'
+      
