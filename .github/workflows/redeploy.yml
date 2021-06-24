@@ -7,8 +7,16 @@ on:
 jobs:
   job1:
     runs-on: windows-latest
+    
+    strategy:
+      matrix:
+        node-version: [12.x]
+    
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
     - uses: cmillward13/fetch-url@1.0
       with:
         url: 'https://api.vercel.com/v1/integrations/deploy/prj_y9Z6HJAZ5OwSGL0L2Emio3y6qbhg/MH1nIGMQPW'
