@@ -189,7 +189,11 @@ const VaccineChart = (props)=>{
               },
             ],
           };
-    
+        
+        //If we're in that stage
+        if(new Date()>= G2day){data.datasets.splice(2,2)}
+        if(new Date()>= G3day){data.datasets.splice(2,2)}
+            
         const options={
             maintainAspectRatio: false,
             scales:{
