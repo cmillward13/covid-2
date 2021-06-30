@@ -9,12 +9,12 @@ const Milestones=()=>{
                     <th className='Step'></th>
                     <th>At Least One Dose⁺</th>
                     <th>Fully Vaccinated⁺</th>
-                    <tr>
-                        <th className='Step'><strike>Step 1</strike></th>
-                        <td><strike>60%</strike></td>
-                        <td><strike>0%</strike></td>
+                    <tr className='OldStep'>
+                        <th className='Step'>Step 1</th>
+                        <td>60%</td>
+                        <td>0%</td>
                     </tr>
-                    <tr>
+                    <tr className='OldStep'>
                         <th className='Step'>Step 2</th>
                         <td>70%</td>
                         <td>20%</td>
@@ -67,6 +67,11 @@ const Milestones=()=>{
                 td{
                     font-size: 1vw;
                     text-align: center;
+                }
+                .OldStep{
+                    text-decoration:line-through;
+                    text-decoration-color: rgba(0,0,0,1)
+
                 }
               `}
         </style>

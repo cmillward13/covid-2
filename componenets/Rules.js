@@ -9,13 +9,13 @@ const Rules=()=>{
                 <tbody>
                     <th className='Step'></th>
                     <th className='Rule'>Public Health Rules</th>
-                    <tr id='CurrentRules'>
-                        <th className='Step' id='Step1Rules'>Step 1</th>
+                    <tr id='OldRules'>
+                        <th className='Step'>Step 1</th>
                         <td>Outdoor dining with 4-person table limit, non-essential retail at 15% capacity
                         </td>
                     </tr>
-                    <tr>
-                        <th className='Step'>Step 2</th>
+                    <tr id='CurrentRules'>
+                        <th className='Step' id='Step2Rules'>Step 2</th>
                         <td>Outdoor sports leagues, personal Care Services</td>
                     </tr>
                     <tr>
@@ -77,6 +77,10 @@ const Rules=()=>{
                         border-radius:10px;
                         box-shadow:1px 1px 20px rgba(0,100,255,.5);
                         -webkit-box-shadow:1px 1px 20px rgba(0,100,255,.5);
+                    }
+                    #OldRules{
+                        text-decoration:line-through;
+                        text-decoration-color: rgba(0,0,0,1)
                     }
                 `}
             </style>
