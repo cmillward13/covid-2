@@ -9,7 +9,18 @@ const VaccineChart = (props)=>{
 
         //get all desired data objects
         var objs=(await props.props.data.result.records).filter(a=>{return a.Agegroup==="Adults_18plus"})
-
+        
+        /***************GO BACK AND ADD THIS TO GRAPH!!!!! ******************* */
+        //"STEP 4" is based on percent of population aged 12+ vaxxed
+        //80% at least one dose, 75% fully vaxx'd
+        var lilobjs=(await props.props.data.result.records).filter(a=>{return a.Agegroup==="12-17yrs"})
+        var step4=objs.map((a,i)=>{
+            let pop=a['Total population']+lilobjs[i]['Total population'];
+            let part=(a['At least one dose_cumulative']+lilobjs[i]['At least one dose_cumulative'])/pop;
+            let full=(a['Second_dose_cumulative']+lilobjs[i]['Second_dose_cumulative'])/pop;
+            return({part:part,full:full})
+        })
+        /******************************************************************/
         //get all dates
         var dates=objs.map(a=>new Date(a.Date.concat("T00:00:00")).toDateString().slice(4))
         
@@ -44,44 +55,27 @@ const VaccineChart = (props)=>{
         const fullSlope=avg(diff(fullyVaxx.slice(-5))) //avg growth rate of fully vaxx
         const partSlope=avg(diff(partiallyVaxx.slice(-5))) //avg growth rate of partially vaxx
 
-        //Best Case (21 Day marks)
-        var G2day= new Date(2021,5,30)
-        var G3day=addDays(G2day,21)
-
-        //Step 2 Predictions
-        const projectedStep2Dates=getDates(dates.slice(-1),G3day)
-        dates.push(...projectedStep2Dates)
-
-        var projectedStep2Full=partiallyVaxx.map(a=>null) //empty data for trendline
-        var projectedStep2FullTrendline=projectedStep2Dates.map((e,i)=>{return((i+1)*fullSlope)+fullyVaxx.slice(-1)[0]});
-        projectedStep2Full.push(...projectedStep2FullTrendline)
-        var projectedStep2Part=partiallyVaxx.map(a=>null) //empty data for trendline
-        var projectedStep2PartTrendline=projectedStep2Dates.map((e,i)=>{return((i+1)*partSlope)+partiallyVaxx.slice(-1)[0]});
-        projectedStep2Part.push(...projectedStep2PartTrendline)
-
         //21 days after step 3 begins
         const t21days=addDays(dates.slice(-1),21)
         const extraDays=getDates(dates.slice(-1),t21days)
         dates.push(...extraDays)
 
-        var projected21Part=projectedStep2Full.map(a=>null)
-        var projected21PartTrendline=extraDays.map((e,i)=>{return((i+1)*partSlope)+projectedStep2PartTrendline.slice(-1)[0]});
+        var projected21Part=partiallyVaxx.map(a=>null)
+        var projected21PartTrendline=extraDays.map((e,i)=>{return((i+1)*partSlope)+partiallyVaxx.slice(-1)[0]});
         projected21Part.push(...projected21PartTrendline)
 
-        var projected21Full=projectedStep2Full.map(a=>null)
+        var projected21Full=fullyVaxx.map(a=>null)
         var projected21FullTrendline=extraDays.map((e,i)=>{
-            var projected=((i+1)*fullSlope)+projectedStep2FullTrendline.slice(-1)[0]
+            var projected=((i+1)*fullSlope)+fullyVaxx.slice(-1)[0]
             if(projected>projected21PartTrendline[i]){
                 return projected21PartTrendline[i]
             }else{return projected}
         });
         projected21Full.push(...projected21FullTrendline)
 
-        
-
 
         var data = {
-            labels:dates,
+            labels:dates,   
             datasets: [
               {
                   label: 'Current At Least One Dose',
@@ -99,23 +93,7 @@ const VaccineChart = (props)=>{
                 
               },
               {
-                  label:'Step 2 Projections - At Least One Dose',
-                  data:projectedStep2Part,
-                  borderColor:'rgba(255, 247, 5, 0.3)',
-                  backgroundColor:'rgba(255, 247, 5, 0.3)',
-                  fill:true,
-                  hidden:false
-              },
-              {
-                  label:'Step 2 Projections - Fully Vaccinated',
-                  data:projectedStep2Full,
-                  borderColor:'rgba(255, 247, 5, 1)',
-                  backgroundColor:'rgba(255, 247, 5, 0.3)',
-                  fill:true,
-                  hidden:false
-              },
-              {
-                label:'Step 3 Projections - At Least One Dose',
+                label:'21 Day Forecast - At Least One Dose',
                 data:projected21Part,
                 borderColor:'rgba(36, 199, 4, 0.3)',
                 backgroundColor:'rgba(36, 199, 4, 0.2)',
@@ -123,7 +101,7 @@ const VaccineChart = (props)=>{
                 hidden:false
               },
               {
-                label:'Step 3 Projections - Fully Vaccinated',
+                label:'21 Day Forecast  - Fully Vaccinated',
                 data:projected21Full,
                 borderColor:'rgba(36, 199, 4, 1)',
                 backgroundColor:'rgba(36, 199, 4, 0.2)',
@@ -134,7 +112,7 @@ const VaccineChart = (props)=>{
           };
         
         //If we're in that stage
-        if(new Date()>= G3day){data.datasets.splice(2,2)}
+        // if(new Date()>= G3day){data.datasets.splice(2,2)}
             
         const options={
             maintainAspectRatio: false,
