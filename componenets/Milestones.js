@@ -19,7 +19,7 @@ const Milestones=()=>{
                         <td>70%</td>
                         <td>20%</td>
                     </tr>
-                    <tr>
+                    <tr className='OldStep'>
                         <th className='Step'>Step 3</th>
                         <td>70-80%</td>
                         <td>25%</td>

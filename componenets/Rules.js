@@ -14,11 +14,11 @@ const Rules=()=>{
                         <td>Outdoor dining with 4-person table limit, non-essential retail at 15% capacity
                         </td>
                     </tr>
-                    <tr id='CurrentRules'>
+                    <tr id='OldRules'>
                         <th className='Step' id='Step2Rules'>Step 2</th>
                         <td>Outdoor sports leagues, personal Care Services</td>
                     </tr>
-                    <tr>
+                    <tr id='CurrentRules'>
                         <th className='Step'>Step 3</th>
                         <td>Gyms, indoor dining, indoor sports, libraries, etc.</td>
                     </tr>
