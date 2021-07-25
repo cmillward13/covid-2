@@ -22,6 +22,10 @@ const Rules=()=>{
                         <th className='Step'>Step 3</th>
                         <td>Gyms, indoor dining, indoor sports, libraries, etc.</td>
                     </tr>
+                    <tr>
+                        <th className='Step'>Next Phase</th>
+                        <td>TBD??</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -61,11 +65,11 @@ const Rules=()=>{
                     }
                     th{
                         width:8vw;
-                        font-size: 1vw;
+                        font-size: 0.9vw;
                         text-align: centre;
                     }
                     td{
-                        font-size: 1vw;
+                        font-size: 0.9vw;
                         text-align: left;
                     }
 
