@@ -24,9 +24,14 @@ const Milestones=()=>{
                         <td>70-80%</td>
                         <td>25%</td>
                     </tr>
+                    <tr>
+                        <th className='Step'>Next Phase</th>
+                        <td>80%</td>
+                        <td>75%</td>
+                    </tr>
                 </tbody>
             </table>
-            <p id='daysBetween'>⁺Of Adult pupolation (18+)<br></br>*Must be in each stage for minimum 21 days before progression</p>
+            <p id='daysBetween'>⁺Of eligible pupolation (12+ years old)<br></br>*Must be in each stage for minimum 21 days before progression</p>
 
 
         <style jsx>
@@ -61,11 +66,11 @@ const Milestones=()=>{
                 }
                 th{
                     width:8vw;
-                    font-size: 1vw;
+                    font-size: 0.9vw;
                     text-align: centre;
                 }
                 td{
-                    font-size: 1vw;
+                    font-size: 0.9vw;
                     text-align: center;
                 }
                 .OldStep{
