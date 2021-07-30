@@ -26,8 +26,9 @@ const VaccineChart = (props)=>{
         }
         /******************************************************************/
         //get all dates
-        var dates=objs.map(a=>new Date(a.Date.concat("T00:00:00")).toDateString().slice(4))
+        var dates=objs.map(a=>new Date(a.Date).toDateString().slice(4))
         
+        console.log(objs)
         //get % individuals partially vaccinated
         const partiallyVaxx=objs.map(a=>(a.Percent_at_least_one_dose*100))
         
