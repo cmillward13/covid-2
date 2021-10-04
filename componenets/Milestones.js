@@ -24,7 +24,7 @@ const Milestones=()=>{
                         <td>70-80%</td>
                         <td>25%</td>
                     </tr>
-                    <tr>
+                    <tr className='OldStep'>
                         <th className='Step'>Next Phase</th>
                         <td>80%</td>
                         <td>75%</td>

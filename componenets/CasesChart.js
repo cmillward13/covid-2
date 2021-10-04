@@ -35,8 +35,10 @@ const CasesChart=(props)=>{
 
         //Make Datasets
         var datasets=[];
+        var defaultShown=['CITY OF HAMILTON','MIDDLESEX-LONDON'] //health unites of interest
         for(let i=0; i<temp.length; i++){
-            if(i<3){temp[i][0].hidden=false}
+            //only show london and hamilton
+            if(defaultShown.includes(temp[i][0].label)){temp[i][0].hidden=false} //choose which ones we want displayed default
             datasets.push(temp[i][0])
         }
 
