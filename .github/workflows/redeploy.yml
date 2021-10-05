@@ -2,7 +2,7 @@ name: redeploy
 
 on:
   schedule: 
-    - cron: '0 13,14 * * *' #(8:00, and 10:00 EST) each morning'
+    - cron: '0 13,14 * * *' #(8:00, and 10:00 EST) each morning
 
 jobs:
   redeploy:
